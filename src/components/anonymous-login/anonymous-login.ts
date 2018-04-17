@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
-import { AuthProvider } from '../../providers/auth/auth';
-import { NavController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../../pages/tabs/tabs';
+
+import { TabsPage } from './../../pages/tabs/tabs';
+import { NavController, LoadingController } from 'ionic-angular';
+import { AuthProvider } from './../../providers/auth/auth';
+
+
 
 @Component({
   selector: 'anonymous-login',
   templateUrl: 'anonymous-login.html'
 })
 export class AnonymousLoginComponent {
+
+  text: string;
+
   constructor(
-    public auth: AuthProvider, 
+    public auth: AuthProvider,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController
   ) {}
@@ -26,8 +31,7 @@ export class AnonymousLoginComponent {
     await this.auth.anonymousLogin();
 
     loader.dismiss()
-    await this.navCtrl.setRoot(TabsPage)
-
+    await this.navCtrl.setRoot(TabsPage);
   }
 
 }

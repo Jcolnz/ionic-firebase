@@ -105,7 +105,6 @@
     <allow-navigation href="http://192.168.0.20:8101" />
     <allow-navigation href="http://192.168.0.14:8100" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
-    <plugin name="cordova-plugin-firebase" spec="https://github.com/arnesson/cordova-plugin-firebase" />
     <allow-navigation href="http://192.168.0.14:8101" />
     <allow-navigation href="http://169.254.36.255:8100" />
     <plugin name="lycwed-cordova-plugin-admob-free" spec="https://github.com/RenaudROHLINGER/lycwed-cordova-plugin-admob-free" />
@@ -113,6 +112,7 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the photo library" />
     </plugin>
-    <engine name="android" spec="7.0.0" />
-    <engine name="ios" spec="4.5.4" />
+    <plugin name="cordova-plugin-firebase" spec="git+https://github.com/arnesson/cordova-plugin-firebase.git" />
+    <engine name="android" spec="~7.0.0" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>

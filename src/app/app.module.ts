@@ -15,15 +15,20 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-/// DELETE this line
-import { firebaseConfig } from '../env';
-
 /// ADD your firebase web credentials in the object below
 
-// const firebaseConfig = { 
-// }
+const firebaseConfig = { 
+  apiKey: "AIzaSyBTfd6OZuYcOx2gDHwbaNF3klCYWmKxWYg",
+    authDomain: "fir-demo-3e972.firebaseapp.com",
+    databaseURL: "https://fir-demo-3e972.firebaseio.com",
+    projectId: "fir-demo-3e972",
+    storageBucket: "",
+    messagingSenderId: "61689650262"
+}
 
+// import after adding credientials for allowing ionic to use firebase.
 import { Firebase } from '@ionic-native/firebase';
+
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from '@ionic-native/camera';
 import { AdMobFree } from '@ionic-native/admob-free';
@@ -39,7 +44,7 @@ import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
   declarations: [
     MyApp,
     TabsPage,
-    LoginPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
     AdMobFree,
     FcmProvider,
     AnalyticsProvider,
-    RemoteConfigProvider
+    RemoteConfigProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

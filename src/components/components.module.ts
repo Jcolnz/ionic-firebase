@@ -27,6 +27,7 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
         UploadModal,
     FcmHandlerComponent,
     FcmTopicComponent,
+    AnonymousLoginComponent,
         
     ],
     imports: [
@@ -45,6 +46,7 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
         UploadModal,
     FcmHandlerComponent,
     FcmTopicComponent,
+    AnonymousLoginComponent,
         
     ],
     entryComponents: [

@@ -27,6 +27,7 @@ export class MyApp {
 
     platform.ready().then(() => {
 
+      // Gets current user and determines page depending on login status.
       auth.getCurrentUser()
         .then(user => { 
 

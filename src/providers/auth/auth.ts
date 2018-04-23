@@ -5,7 +5,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import * as firebase from 'firebase/app';
 
 import { Observable } from 'rxjs/Observable';
-import { switchMap, take } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 
 import { Facebook } from '@ionic-native/facebook';
 
@@ -22,24 +22,22 @@ export class AuthProvider {
     
       // Get Observable of the firebase user, if they are logged in, 
       // switch to another user of the users firestore document, otherwiser return null.
-      this.user = this.afAuth.authState.pipe(
-        switchMap(user => {
-          console.log(user);
-          if (user) {
-            return this.afs.doc<any>(`users/${user.uid}`).valueChanges();
-          } else {
-            return Observable.of(null);
-          }
-        })
-      )
+      //this.platform.ready().then((readySource) => {
+        this.user = this.afAuth.authState.pipe(
+          switchMap(user => {
+            console.log(user);
+            if (user) {
+              return this.afs.doc<any>(`users/${user.uid}`).valueChanges();
+            } else {
+              return Observable.of(null);
+            }
+          })
+        )
+      //})
+      
   }
 
-  // Current user as a promise. Useful for one-off operations.
-  getCurrentUser(): Promise<any> {
-    return this.user.pipe(take(1)).toPromise() // Useful for ionic lifecycle hooks. Pipe in take(1) to emit the last value and return as a promise.
-  }
-
-  private UpdateUserData(user: any) {
+  private updateUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
 
     const data = {
@@ -52,10 +50,66 @@ export class AuthProvider {
     return userRef.set(data, { merge: true }); // Merge doesn't override existing data.
   }
 
-  async anonymousLogin(): Promise<void> {
-    const user = await this.afAuth.auth.signInAnonymously(); // returns promise so we can await.
-    await this.UpdateUserData(user); // then update data once signed in.
+  //// Anonymous Login ////
 
+  async anonymousLogin(): Promise<void> {
+    
+    const user = await this.afAuth.auth.signInAnonymously(); // returns promise so we can await.
+
+    await this.updateUserData(user); // then update data once signed in.
+
+  }
+
+  async facebookLogin() {
+    if (this.platform.is('cordova')) {
+      return await this.nativeFacebookLogin();
+    } else {
+      return await this.webFacebookLogin();
+    }
+  }
+
+  async nativeFacebookLogin(): Promise<void> {
+    try {
+
+      const response = await this.facebook.login(['email', 'public_profile']);
+      const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+    
+      const firebaseUser = await firebase.auth().signInWithCredential(facebookCredential);
+
+      return await this.updateUserData(firebaseUser);
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  async webFacebookLogin(): Promise<void> {
+    try {
+      
+      const provider = new firebase.auth.FacebookAuthProvider();
+      const credential = await this.afAuth.auth.signInWithPopup(provider);
+
+      return await this.updateUserData(credential.user);
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  /* //// Helpers //// */
+
+  // Current user as a promise. Useful for one-off operations.
+  async getCurrentUser(): Promise<any> {
+    return this.user.pipe(first()).toPromise()
+  }
+
+  async isLoggedIn(): Promise<boolean> {
+    const user = await this.getCurrentUser();
+    return !!user
+  }
+
+  async logout(): Promise<any> {
+    return this.afAuth.auth.signOut();
   }
 
 }

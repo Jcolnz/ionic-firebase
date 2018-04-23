@@ -23,7 +23,7 @@
     "@ionic-native/admob-free": "^4.5.3",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "4.4.0",
-    "@ionic-native/facebook": "^4.5.3",
+    "@ionic-native/facebook": "^4.7.0",
     "@ionic-native/firebase": "^4.5.3",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/status-bar": "4.4.0",
@@ -67,8 +67,8 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-facebook4": {
-        "APP_ID": "1647541315328951",
-        "APP_NAME": "Ionic Firestarter"
+        "APP_ID": "yourAppId",
+        "APP_NAME": "yourAppName"
       },
       "cordova-plugin-statusbar": {},
       "cordova-plugin-firebase": {},

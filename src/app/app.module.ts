@@ -74,7 +74,8 @@ import { RemoteConfigProvider } from '../providers/remote-config/remote-config';
     FcmProvider,
     AnalyticsProvider,
     RemoteConfigProvider,
-    AuthProvider
+    AuthProvider,
+    Facebook
   ]
 })
 export class AppModule {}

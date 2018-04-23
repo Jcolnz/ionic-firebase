@@ -28,6 +28,7 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
     FcmHandlerComponent,
     FcmTopicComponent,
     AnonymousLoginComponent,
+    FacebookLoginComponent,
         
     ],
     imports: [
@@ -47,6 +48,7 @@ import { FcmTopicComponent } from './fcm-topic/fcm-topic';
     FcmHandlerComponent,
     FcmTopicComponent,
     AnonymousLoginComponent,
+    FacebookLoginComponent,
         
     ],
     entryComponents: [

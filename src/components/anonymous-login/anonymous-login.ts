@@ -12,8 +12,6 @@ import { AuthProvider } from './../../providers/auth/auth';
 })
 export class AnonymousLoginComponent {
 
-  text: string;
-
   constructor(
     public auth: AuthProvider,
     public navCtrl: NavController,

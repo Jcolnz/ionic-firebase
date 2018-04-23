@@ -16,6 +16,6 @@ export class TabsPage {
   }
 
   ionViewCanEnter() {
-    return this.auth.isLoggedIn();
+    //return this.auth.isLoggedIn();
   }
 }

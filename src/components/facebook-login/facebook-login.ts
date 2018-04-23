@@ -1,26 +1,35 @@
 import { Component } from '@angular/core';
-import { AuthProvider } from '../../providers/auth/auth';
-import { NavController } from 'ionic-angular';
-import { TabsPage } from '../../pages/tabs/tabs';
 
+import { TabsPage } from './../../pages/tabs/tabs';
+import { NavController, LoadingController } from 'ionic-angular';
+import { AuthProvider } from './../../providers/auth/auth';
+
+
+/**
+ * Generated class for the FacebookLoginComponent component.
+ *
+ * See https://angular.io/api/core/Component for more info on Angular
+ * Components.
+ */
 @Component({
   selector: 'facebook-login',
   templateUrl: 'facebook-login.html'
 })
-
 export class FacebookLoginComponent {
 
   constructor(
-    public auth: AuthProvider, 
-    public navCtrl: NavController
+    public auth: AuthProvider,
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController
   ) {}
 
-  async login() {
 
+  async login() {
+    
     await this.auth.facebookLogin();
 
-    await this.navCtrl.setRoot(TabsPage)
-
+    await this.navCtrl.setRoot(TabsPage);
   }
+
 
 }
